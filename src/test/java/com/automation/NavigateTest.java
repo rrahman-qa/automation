@@ -10,6 +10,4 @@ public class NavigateTest extends BaseTest{
         driver.navigate().to("http://bbc.co.uk");
         driver.findElement(By.linkText("News")).click();
     }
-
-
 }
