@@ -1,14 +1,13 @@
 package com.automation;
 
+import org.junit.AfterClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.ResourceBundle;
 
 public class BaseTest {
     static WebDriver driver = null;
@@ -35,12 +34,18 @@ public class BaseTest {
             try {
                 input = new FileInputStream("application.properties");
                 prop.load(input);
+                input.close();
             }
             catch (IOException ex){
                 System.out.println("Unable to load properties file");
             }
         }
         return prop.getProperty(key);
+    }
+
+    @AfterClass
+    public static void cleanUp(){
+        driver.close();
     }
 
 }

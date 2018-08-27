@@ -1,6 +1,5 @@
 package com.automation;
 
-import org.junit.AfterClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
@@ -12,8 +11,5 @@ public class NavigateTest extends BaseTest{
         driver.findElement(By.linkText("News")).click();
     }
 
-    @AfterClass
-    public static void cleanUp(){
-        driver.close();
-    }
+
 }
