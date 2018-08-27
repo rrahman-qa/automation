@@ -16,6 +16,7 @@ public class BaseTest {
 
     public BaseTest(){
         ChromeOptions options = new ChromeOptions();
+        //Set options and properties depending on platform
         if(getProperty("platform").equals("linux")){
             System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
             System.setProperty("webdriver.chrome.binary", "/opt/google/chrome/google-chrome");
