@@ -1,25 +1,28 @@
 package com.automation;
 
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class NavigateTest {
+public class NavigateTest extends BaseTest{
+
+    public NavigateTest(){
+        super();
+    }
 
     @Test
-    public void Test(){
-        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
-        System.setProperty("webdriver.chrome.binary", "/opt/google/chrome/google-chrome");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        WebDriver driver = new ChromeDriver(options);
+    public void test(){
         driver.navigate().to("http://bbc.co.uk");
         driver.findElement(By.linkText("News")).click();
+    }
+
+    @AfterClass
+    public static void cleanUp(){
         driver.close();
     }
 }
