@@ -14,9 +14,8 @@ public class NavigateTest {
         System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
         System.setProperty("webdriver.chrome.binary", "/opt/google/chrome/google-chrome");
         ChromeOptions options = new ChromeOptions();
-        options.setExperimentalOption("useAutomationExtension", false);
-        //options.addArguments("--no-sandbox");
-        //options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
         WebDriver driver = new ChromeDriver(options);
         driver.navigate().to("http://bbc.co.uk");
         driver.findElement(By.linkText("News")).click();
