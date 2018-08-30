@@ -19,7 +19,7 @@ public class NavigateTest extends BaseTest{
             File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
             // Now you can do whatever you need to do with it, for example copy somewhere
-            FileUtils.copyFile(scrFile, new File("screenshots/" + java.util.UUID.randomUUID().toString()));
+            FileUtils.copyFile(scrFile, new File("screenshots/" + java.util.UUID.randomUUID().toString() + ".png"));
         }
         catch (IOException ex){
             System.out.println(ex.getStackTrace().toString());
