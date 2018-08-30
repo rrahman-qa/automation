@@ -12,11 +12,18 @@ import java.io.IOException;
 public class NavigateTest extends BaseTest{
     
     @Test
-    public void test() throws IOException {
+    public void test() {
         driver.navigate().to("http://bbc.co.uk");
-        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        // Now you can do whatever you need to do with it, for example copy somewhere
-        FileUtils.copyFile(scrFile, new File("screenshots/" + java.util.UUID.randomUUID().toString()));
+
+        try {
+            File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+
+            // Now you can do whatever you need to do with it, for example copy somewhere
+            FileUtils.copyFile(scrFile, new File("screenshots/" + java.util.UUID.randomUUID().toString()));
+        }
+        catch (IOException ex){
+            System.out.println(ex.getStackTrace().toString());
+        }
         driver.findElement(By.linkText("News")).click();
     }
 }
