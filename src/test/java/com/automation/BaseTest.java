@@ -2,6 +2,7 @@ package com.automation;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -38,13 +39,13 @@ public class BaseTest {
         }
 
         try {
-            driver = new RemoteWebDriver(new URL(getProperty("remotewebdriver")), DesiredCapabilities.chrome());
+            driver = new RemoteWebDriver(new URL(getProperty("remotewebdriver")), new ChromeOptions());
             //driver = new ChromeDriver(options);
-            //driver.manage().window().maximize();
         }
         catch(MalformedURLException ex){
             ex.printStackTrace();
         }
+        driver.manage().window().setSize(new Dimension(1024,768));
     }
 
     public static String getProperty(String key){
