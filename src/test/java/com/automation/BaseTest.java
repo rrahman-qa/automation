@@ -45,7 +45,6 @@ public class BaseTest {
         catch(MalformedURLException ex){
             ex.printStackTrace();
         }
-        driver.manage().window().setSize(new Dimension(1024,768));
     }
 
     public static String getProperty(String key){
