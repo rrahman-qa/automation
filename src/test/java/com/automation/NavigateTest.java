@@ -1,6 +1,7 @@
 package com.automation;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
@@ -14,16 +15,12 @@ public class NavigateTest extends BaseTest{
     @Test
     public void test() {
         driver.navigate().to("http://bbc.co.uk");
+        System.out.println("Page loaded");
 
-        try {
-            File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-            // Now you can do whatever you need to do with it, for example copy somewhere
-            FileUtils.copyFile(scrFile, new File("screenshots/" + java.util.UUID.randomUUID().toString() + ".png"));
-        }
-        catch (IOException ex){
-            System.out.println(ex.getStackTrace().toString());
-        }
+        getScreenshot("HOME");
         driver.findElement(By.linkText("News")).click();
+        System.out.println("News link clicked");
+        getScreenshot("NEWS");
+        Assert.assertTrue(driver.findElement(By.xpath("//*[@id=\"brand\"]")).isDisplayed());
     }
 }

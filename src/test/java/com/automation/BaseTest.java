@@ -1,12 +1,21 @@
 package com.automation;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 
 public class BaseTest {
@@ -14,7 +23,7 @@ public class BaseTest {
     static Properties prop = new Properties();
     static InputStream input = null;
 
-    public BaseTest(){
+    public BaseTest() {
         ChromeOptions options = new ChromeOptions();
         //Set options and properties depending on platform
         if(getProperty("platform").equals("linux")){
@@ -27,7 +36,15 @@ public class BaseTest {
         else {
             System.setProperty("webdriver.chrome.driver", "C:\\ChromeDriver\\chromedriver.exe");
         }
-        driver = new ChromeDriver(options);
+
+        try {
+            driver = new RemoteWebDriver(new URL(getProperty("remotewebdriver")), DesiredCapabilities.chrome());
+            //driver = new ChromeDriver(options);
+            //driver.manage().window().maximize();
+        }
+        catch(MalformedURLException ex){
+            ex.printStackTrace();
+        }
     }
 
     public static String getProperty(String key){
@@ -42,6 +59,19 @@ public class BaseTest {
             }
         }
         return prop.getProperty(key);
+    }
+
+    public void getScreenshot(String prefixSection){
+        try {
+            File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+
+            // Now you can do whatever you need to do with it, for example copy somewhere
+            FileUtils.copyFile(scrFile, new File("screenshots/" + prefixSection + "_" + java.util.UUID.randomUUID().toString() + ".png"));
+            System.out.println("Screenshot captured");
+        }
+        catch (IOException ex){
+            System.out.println(ex.getStackTrace().toString());
+        }
     }
 
     @AfterClass
