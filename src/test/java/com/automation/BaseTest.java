@@ -39,8 +39,8 @@ public class BaseTest {
         }
 
         try {
-            driver = new RemoteWebDriver(new URL(getProperty("remotewebdriver")), new ChromeOptions());
-            //driver = new ChromeDriver(options);
+            //driver = new RemoteWebDriver(new URL(getProperty("remotewebdriver")), new ChromeOptions());
+            driver = new ChromeDriver(options);
         }
         catch(MalformedURLException ex){
             ex.printStackTrace();
