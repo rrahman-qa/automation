@@ -38,13 +38,13 @@ public class BaseTest {
             System.setProperty("webdriver.chrome.driver", "C:\\ChromeDriver\\chromedriver.exe");
         }
 
-        try {
+        //try {
             //driver = new RemoteWebDriver(new URL(getProperty("remotewebdriver")), new ChromeOptions());
             driver = new ChromeDriver(options);
-        }
-        catch(MalformedURLException ex){
-            ex.printStackTrace();
-        }
+       // }
+       // catch(MalformedURLException ex){
+       //     ex.printStackTrace();
+       // }
     }
 
     public static String getProperty(String key){
